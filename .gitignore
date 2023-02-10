@@ -39,3 +39,4 @@ venv/
 .deactivate.sh
 .vscode
 .fleet
+.DS_STORE
