@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sails"
+dynamic = ["version"]
+license = { file = "LICENSE" }
+requires-python = ">=3.6.1"
+authors = [{ name = "Overflow Digital", email = "team@overflow.digital" }]
+maintainers = [
+    { name = "Katerina Tiddy", email = "katerina@overflow.digital" },
+    { name = "Joshua Thompson-Lindley", email = "joshua@overflow.digital" }
+]
+description = "Overflow SDK extensions to the Python Standard Library"
+readme = "README.md"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6"
+]
+dependencies = [
+]
+
+[project.urls]
+repository = "https://github.com/overflowdigital/sails/"
+
+[tools.setuptools]
+platforms = ["any"]
+
+[tools.setuptools.packages.find]
+where = ['src']
+include = ['sails*']
+
+[tool.setuptools.dynamic]
+version = { attr = "sails.__version__" }
