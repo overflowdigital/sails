@@ -1,4 +1,5 @@
 import os
+import platform
 
 
 def get_filename(path: str) -> str:
@@ -73,3 +74,29 @@ def get_drive(path: str) -> str:
     :rtype: str
     """
     return os.path.splitdrive(path)[0] or "/"
+
+
+def set_windows_file_hidden(file: str) -> bool:
+    """Set the hidden attribute for a file on Windows.
+
+    :param file: The file to set as hidden.
+    :type file: str
+    :return: True if the file was set as hidden, False otherwise.
+    :rtype: bool
+
+    :raises ctypes.WinError: If the file cannot be set as hidden.
+    """
+    if "windows" in platform.system().lower():
+        import ctypes
+
+        ctypes.windll.kernel32.SetFileAttributesW.argtypes = (
+            ctypes.c_wchar_p,
+            ctypes.c_uint32,
+        )
+        ret: int = ctypes.windll.kernel32.SetFileAttributesW(file, 0x02)
+
+        if not ret:
+            raise ctypes.WinError()
+
+        return True
+    return False
